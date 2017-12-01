@@ -1,0 +1,46 @@
+{% extends '::base.html.twig' %}
+
+{% block page_title %}Dokumentation{% endblock %}
+
+{% block page_actions %}
+    <div class="pull-right">
+        <form method="get" action="{{ path('whatwedo_doc_doc_search') }}">
+            <div class="input-group input-group-sm" style="max-width: 300px">
+                <input type="text" class="form-control" name="query" placeholder="Suchbegriff..." value="{{ query }}" required>
+                <span class="input-group-btn">
+                <button class="btn btn-primary" type="submit">
+                    <i class="fa fa-search"></i>
+                </button>
+            </span>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title">
+                        Suchresulate für {{ query }}
+                    </h3>
+                </div>
+                <div class="box-body">
+                    {% for document in documents %}
+                        <div style="margin-bottom: 30px">
+                            <h4><a href="{{ document.path }}">{{ document.title }}</a></h4>
+                            <p>
+                                {{ document.content | markdown('whatwedo_doc') | doc_excerpt }}<br>
+                                <a href="{{ document.path }}">Weiterlesen...</a>
+                            </p>
+                        </div>
+                    {% else %}
+                        <p>Keine Übereinstimmungen mit <strong>{{ query }}</strong> gefunden</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

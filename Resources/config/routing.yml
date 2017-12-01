@@ -1,0 +1,3 @@
+whatwedo_doc_index_import:
+    prefix: /
+    resource: "@whatwedoDocBundle/Resources/config/routing/doc.yml"

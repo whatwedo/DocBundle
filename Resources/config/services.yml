@@ -1,0 +1,16 @@
+services:
+    whatwedo_doc.manager.doc:
+        class: whatwedo\DocBundle\Manager\DocManager
+        arguments: ["@service_container", "@router", "@markdown.parser","@white_october_breadcrumbs"]
+
+    whatwedo_doc.twig.doc:
+        class: whatwedo\DocBundle\Twig\DocExtension
+        arguments: ["@whatwedo_doc.manager.doc"]
+        tags:
+            - twig.extension
+
+    whatwedo_doc.parser.doc:
+        class: whatwedo\DocBundle\Parser\DocParser
+        tags:
+            - { name: markdown.parser, alias: whatwedo_doc }
+

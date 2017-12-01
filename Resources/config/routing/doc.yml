@@ -1,0 +1,9 @@
+whatwedo_doc_doc_search:
+    path:  /search
+    defaults: { _controller: "whatwedoDocBundle:Doc:search" }
+
+whatwedo_doc_doc_page:
+    path:  /{path}
+    defaults: { _controller: "whatwedoDocBundle:Doc:page", path: ""  }
+    requirements:
+        path:  .*
