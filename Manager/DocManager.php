@@ -305,7 +305,7 @@ class DocManager
     protected function buildPageBreadcrumbs($path)
     {
         // Add default
-        $this->breadcrumbs->addItem('Home', $this->router->generate('smart_exam_frontend_index_index'));
+        $this->breadcrumbs->addItem($this->config['home']['title'], $this->router->generate($this->config['home']['route']));
         $this->breadcrumbs->addItem('Dokumentation', $this->router->generate('whatwedo_doc_doc_page'));
 
         // Add pages
@@ -328,7 +328,7 @@ class DocManager
      */
     protected function buildSearchBreadCrumbs()
     {
-        $this->breadcrumbs->addItem('Home', $this->router->generate('smart_exam_frontend_index_index'));
+        $this->breadcrumbs->addItem($this->config['home']['title'], $this->router->generate($this->config['home']['route']));
         $this->breadcrumbs->addItem('Dokumentation', $this->router->generate('whatwedo_doc_doc_page'));
         $this->breadcrumbs->addItem('Suche', $this->router->generate('whatwedo_doc_doc_search'));
     }
