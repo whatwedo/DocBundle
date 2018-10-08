@@ -27,15 +27,25 @@
 
 namespace whatwedo\DocBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use whatwedo\DocBundle\Manager\DocManager;
 
 /**
  * Class DocController
  * @package whatwedo\DocBundle\Controller
  */
-class DocController extends Controller
+class DocController extends AbstractController
 {
+    /**
+     * @var DocManager
+     */
+    protected $docManager;
+
+    public function __construct(DocManager $docManager)
+    {
+        $this->docManager = $docManager;
+    }
 
     /**
      * @param Request $request
@@ -44,8 +54,7 @@ class DocController extends Controller
      */
     public function pageAction(Request $request, $path)
     {
-        $docManager = $this->get('whatwedo_doc.manager.doc');
-        return $docManager->getDocumentResponse($path);
+        return $this->docManager->getDocumentResponse($path);
     }
 
     /**
@@ -59,7 +68,7 @@ class DocController extends Controller
             $this->addFlash('error', sprintf('Ungültiger Suchbegriff'));
             return $this->redirectToRoute('whatwedo_doc_doc_page');
         }
-        $docManager = $this->get('whatwedo_doc.manager.doc');
-        return $docManager->getSearchResponse($query);
+
+        return $this->docManager->getSearchResponse($query);
     }
 }
