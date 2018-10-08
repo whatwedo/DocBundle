@@ -14,3 +14,6 @@ services:
         tags:
             - { name: markdown.parser, alias: whatwedo_doc }
 
+    whatwedo\DocBundle\Controller\DocController:
+        arguments: ['@whatwedo_doc.manager.doc']
+        tags: ['controller.service_arguments']
